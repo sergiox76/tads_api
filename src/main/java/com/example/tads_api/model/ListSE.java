@@ -8,6 +8,10 @@ public class ListSE {
     private Node head;
     private int size;
 
+    public ListSE() {
+
+    }
+
     //Add End
     public void add(Kid kid){
         // Verificamos si hay datos
