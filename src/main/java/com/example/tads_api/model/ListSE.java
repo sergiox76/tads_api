@@ -119,19 +119,19 @@ public class ListSE {
     }
 
     //Eliminar por posicion
-    public void deleteByPosition(int position) throws KidsException {
-        if (position <= 0 || position > size) {
+    public void deleteByPosition(int pos) throws KidsException {
+        if (pos <= 0 || pos > size) {
             throw new KidsException("La posición está fuera de rango.");
         }
 
-        if (position == 1) {
+        if (pos == 1) {
             // Si la posición es 1, actualiza la cabeza para eliminar el primer nodo
             head = head.getNext();
         } else {
             Node temp = head;
             int contador = 1;
             // Encuentra el nodo anterior al que se va a eliminar
-            while (contador < position - 1) {
+            while (contador < pos - 1) {
                 temp = temp.getNext();
                 contador++;
             }
