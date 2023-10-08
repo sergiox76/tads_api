@@ -1,6 +1,8 @@
 package com.example.tads_api.service;
+import com.example.tads_api.exceptions.KidsException;
 import com.example.tads_api.model.Kid;
 import com.example.tads_api.model.ListSE;
+import com.example.tads_api.model.Node;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 @Data
@@ -18,5 +20,23 @@ public class ListSEService {
         kids.add(new Kid("28746378192","Daniela Torrres"
                 ,(byte) 18,"niña"));
 
+
+    }
+    public String invert(){
+        kids.invert();
+        return "Invertido";
+    }
+    public String changeExt(){
+        kids.changeExt();
+        return "Invertidos";
+    }
+    public String updateInPos(byte pos, Kid kid){
+        kids.updateInPos(pos,kid);
+        return "Actualizado";
+    }
+    public String deleteByPosition(int pos){
+        kids.deletePos(pos);
+        return "Eliminado";
     }
 }
+
