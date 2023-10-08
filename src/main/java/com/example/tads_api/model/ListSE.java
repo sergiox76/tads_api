@@ -160,6 +160,4 @@ public class ListSE {
     }
 
 
-    public void deletePos(int pos) {
-    }
 }
