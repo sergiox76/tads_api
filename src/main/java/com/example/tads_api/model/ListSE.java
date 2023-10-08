@@ -123,22 +123,17 @@ public class ListSE {
         if (pos <= 0 || pos > size) {
             throw new KidsException("La posición está fuera de rango.");
         }
-
         if (pos == 1) {
-            // Si la posición es 1, actualiza la cabeza para eliminar el primer nodo
             head = head.getNext();
         } else {
             Node temp = head;
             int contador = 1;
-            // Encuentra el nodo anterior al que se va a eliminar
             while (contador < pos - 1) {
                 temp = temp.getNext();
                 contador++;
             }
-            // Actualiza las referencias para eliminar el nodo en la posición especificada
             temp.setNext(temp.getNext().getNext());
         }
-
         size--;
     }
 
