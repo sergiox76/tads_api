@@ -13,13 +13,13 @@ public class ListSEService {
     public ListSEService() {
         kids = new ListSE();
         kids.add(new Kid("1005085752", "Valeria Osorio"
-                , (byte) 20, "niña"));
+                , (byte) 20, "mujer"));
         kids.add(new Kid("356373763", "Jhair Torres"
-                , (byte) 18, "niño"));
+                , (byte) 18, "hombre"));
         kids.add(new Kid("4554544554", "Sergio Núñez"
-                , (byte) 19, "niño"));
+                , (byte) 19, "hombre"));
         kids.add(new Kid("28746378192", "Daniela Torrres"
-                , (byte) 18, "niña"));
+                , (byte) 18, "mujer"));
 
 
     }

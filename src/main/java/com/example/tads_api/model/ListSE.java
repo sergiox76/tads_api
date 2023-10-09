@@ -69,6 +69,30 @@ public class ListSE {
             this.size++;
         }
     }
+    public void intercalateByGender() throws KidsException {
+        if (this.head == null) {
+            throw new KidsException("Lista vacia");
+        } else if (this.head.getNext() == null) {
+            throw new KidsException("Insuficientes elementos");
+        } else {
+            ListSE listCopy = new ListSE();
+            Node temp = this.head;
+            int posMale = 1;
+            int posFemale = 2;
+            while (temp != null) {
+                if (temp.getData().getGender().equals("hombre")) {
+                    listCopy.addAtPosition(posMale, temp.getData());
+                    posMale = posMale + 2;
+                } else if (temp.getData().getGender().equals("mujer")) {
+                    listCopy.addAtPosition(posFemale, temp.getData());
+                    posFemale = posFemale + 2;
+                }
+                temp = temp.getNext();
+            }
+            this.head = listCopy.getHead();
+        }
+    }
+
 
 
     //Invertir la lista

@@ -53,20 +53,32 @@ public class ListSEController {
         return new ResponseEntity<>("Niño añadido en la posición " + position, HttpStatus.OK);
     }
 
+    //intercalar por genero
+    @GetMapping(path = "/intercalateByGender")
+    public ResponseEntity<String> intercalateKidsByGender() {
+        try {
+            listSEService.getKids().intercalateByGender();
+            return new ResponseEntity<>("Niños intercalados por género exitosamente", HttpStatus.OK);
+        } catch (KidsException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     //inverir la lista
-    @GetMapping("/invertList")
+    @GetMapping(path = "/invertList")
     public ResponseEntity<String> invertList() {
         listSEService.getKids().invert();
         return new ResponseEntity<>("Lista invertida exitosamente", HttpStatus.OK);
     }
-//invertir extremos
-    @GetMapping("/changeExt")
+
+    //invertir extremos
+    @GetMapping(path = "/changeExt")
     public ResponseEntity<String> changeExtremes() {
         listSEService.getKids().changeExt();
         return new ResponseEntity<>("Extremos invertidos exitosamente", HttpStatus.OK);
     }
 
-//eliminar por id
+    //eliminar por id
     @DeleteMapping(path="/deleteid/{identification}")
     public  ResponseEntity<String> deleteid(@PathVariable String identification) {
         // irian las validaciones de la entrada
@@ -76,7 +88,7 @@ public class ListSEController {
     }
 
     //eliminar por posicion
-    @DeleteMapping("/deleteByPosition/{position}")
+    @DeleteMapping(path = "/deleteByPosition/{position}")
     public ResponseEntity<String> deleteKidByPosition(@PathVariable int position) {
         try {
             listSEService.getKids().deleteByPosition(position);
@@ -92,6 +104,4 @@ public class ListSEController {
         return new ResponseEntity<String>(
                 "actualizado exitosamente", HttpStatus.OK);
     }
-
 }
-
