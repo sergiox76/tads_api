@@ -50,11 +50,10 @@ public class ListSE {
     public void addAtPosition(int pos, Kid kid) {
         if (pos == 1) {
             this.addToStart(kid);
-            this.size++;
+
 
         } else if (pos > this.size) {
             this.add(kid);
-            this.size++;
 
         } else if (pos <= this.size) {
             Node temp = this.head;
@@ -77,15 +76,15 @@ public class ListSE {
         } else {
             ListSE listCopy = new ListSE();
             Node temp = this.head;
-            int posMale = 1;
-            int posFemale = 2;
+            int posHombre = 1;
+            int posMujer = 2;
             while (temp != null) {
                 if (temp.getData().getGender().equals("hombre")) {
-                    listCopy.addAtPosition(posMale, temp.getData());
-                    posMale = posMale + 2;
+                    listCopy.addAtPosition(posHombre, temp.getData());
+                    posHombre = posHombre + 2;
                 } else if (temp.getData().getGender().equals("mujer")) {
-                    listCopy.addAtPosition(posFemale, temp.getData());
-                    posFemale = posFemale + 2;
+                    listCopy.addAtPosition(posMujer, temp.getData());
+                    posMujer = posMujer + 2;
                 }
                 temp = temp.getNext();
             }
