@@ -104,4 +104,25 @@ public class ListSEController {
         return new ResponseEntity<String>(
                 "actualizado exitosamente", HttpStatus.OK);
     }
+
+    @GetMapping(path = "/childrenByCity")
+    public ResponseEntity<ResponseDTO> cityReport(){
+        Object output = null;
+        try {
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
+                    listSEService.cityReport(),null),HttpStatus.OK);
+        } catch (KidsException e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.NO_CONTENT.value(),
+                    null,errors),HttpStatus.OK);
+
+        }
+    }
+
+    @GetMapping(path="/test")
+    public ResponseEntity<ResponseDTO> getCities(){
+        return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
+                listSEService.getCities(),null),HttpStatus.OK);
+    }
 }

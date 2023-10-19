@@ -1,5 +1,7 @@
 package com.example.tads_api.model;
 
+import com.example.tads_api.controller.dto.DataDTO;
+import com.example.tads_api.controller.dto.GenderDTO;
 import com.example.tads_api.exceptions.KidsException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -176,6 +178,87 @@ public class ListSE {
             }
         }
     }
+    public List<String> getCities() {
+        Node temp = this.head;
+        List<String> cities = new ArrayList<>();
 
+        while (temp != null) {
+            String city = temp.getData().getCity();
+            if (!cities.contains(city)) {
+                cities.add(city);
+            }
+            temp = temp.getNext();
+        }
+
+        return cities;
+    }
+
+    public List<DataDTO> cityReport() throws KidsException{
+        if(this.head==null){
+            throw new KidsException("Lista vacía");
+        } else {
+            List<String>  cities = this.getCities();
+
+            List<DataDTO> cityReport = new ArrayList<>();
+
+            List<DataDTO> cities_report = new ArrayList<>();
+
+            for(String city :cities){
+                int total_city_count=0;
+                int male_count=0;
+                int female_count =0;
+                Node temp = this.head;
+                while(temp!=null){
+                    if(temp.getData().getCity().equals(city)){
+                        System.out.println("------");
+                        System.out.println(temp.getData());
+                        System.out.println("----");
+                        System.out.println(city);
+                        if(temp.getData().getGender().equals("hombre")){
+                            System.out.println("hombre");
+                            System.out.println("---");
+                            System.out.println(temp.getData());
+                            System.out.println("Previous value: "+male_count);
+                            System.out.println("----");
+                            male_count++;
+                            System.out.println("New hombre value:  "+male_count);
+                        }
+                        if(temp.getData().getGender().equals("mujer")){
+                            System.out.println("mujer");
+                            System.out.println("-----");
+                            System.out.println(temp.getData());
+                            System.out.println("Previous value: "+female_count);
+                            System.out.println("-----");
+                            female_count++;
+                            System.out.println("New mujer value:  "+female_count);
+                        }
+                        total_city_count++;
+                        System.out.println("New total count in"+city+"-----"+total_city_count);
+                    }
+
+                    temp = temp.getNext();
+                }
+                GenderDTO city_females = new GenderDTO("mujer",female_count);
+                GenderDTO city_males = new GenderDTO("hombre",male_count);
+                System.out.println(city+"mujer in the city  "+ city_females);
+                System.out.println(city+"hombre in the city  "+city_males);
+
+                List<GenderDTO> genders = new ArrayList<>();
+                genders.add(city_females);
+                genders.add(city_males);
+
+                DataDTO finalCityReport = new DataDTO(city,total_city_count,genders);
+                System.out.println("----");
+                System.out.println(finalCityReport);
+
+                cities_report.add(finalCityReport);
+            }
+
+            System.out.println("---");
+            System.out.println(cities_report);
+
+            return cities_report;
+        }
+    }
 
 }
