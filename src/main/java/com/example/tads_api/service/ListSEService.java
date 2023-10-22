@@ -1,6 +1,7 @@
 package com.example.tads_api.service;
 import com.example.tads_api.controller.dto.DataDTO;
 import com.example.tads_api.exceptions.KidsException;
+import com.example.tads_api.model.City;
 import com.example.tads_api.model.Kid;
 import com.example.tads_api.model.ListSE;
 import com.example.tads_api.model.Node;
@@ -17,13 +18,13 @@ public class ListSEService {
     public ListSEService() {
         kids = new ListSE();
         kids.add(new Kid("1005085752", "Valeria Osorio"
-                , (byte) 20, "mujer","Cartago"));
+                , (byte) 20, "mujer",new City("05001","Medellin")));
         kids.add(new Kid("356373763", "Jhair Torres"
-                , (byte) 18, "hombre","Mocoa"));
+                , (byte) 18, "hombre",new City("05091","Betania")));
         kids.add(new Kid("4554544554", "Sergio Núñez"
-                , (byte) 19, "hombre","Pitalito"));
+                , (byte) 19, "hombre",new City("17001","Manizales")));
         kids.add(new Kid("28746378192", "Daniela Torrres"
-                , (byte) 18, "mujer","Pitalito"));
+                , (byte) 18, "mujer",new City("17001","Manizales")));
 
 
     }
