@@ -9,6 +9,10 @@ public class List_DE {
     private Node head;
     private int size;
 
+    public List_DE() {
+
+    }
+
     public void addKidToEnd(Kid kid){
 
         //verificamos si hay datos en la cabeza

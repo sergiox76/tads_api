@@ -5,6 +5,8 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class City {
+    @NotEmpty
     private String code;
+    @NotEmpty
     private String city;
 }
