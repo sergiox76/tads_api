@@ -183,7 +183,7 @@ public class ListSE {
         List<String> cities = new ArrayList<>();
 
         while (temp != null) {
-            String city = temp.getData().getCity();
+            String city = temp.getData().getCityname().getCity();
             if (!cities.contains(city)) {
                 cities.add(city);
             }
@@ -209,7 +209,7 @@ public class ListSE {
                 int female_count =0;
                 Node temp = this.head;
                 while(temp!=null){
-                    if(temp.getData().getCity().equals(city)){
+                    if(temp.getData().getCityname().getCity().equals(city)){
                         System.out.println("------");
                         System.out.println(temp.getData());
                         System.out.println("----");
