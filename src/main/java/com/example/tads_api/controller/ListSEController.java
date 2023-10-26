@@ -97,14 +97,12 @@ public class ListSEController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-
     @PutMapping(path="/updateinpos/{posicion}")
     public ResponseEntity<String> updateInPos(@PathVariable int posicion,@RequestBody Kid kid){
         listSEService.getKids().updateInPos(posicion,kid);
         return new ResponseEntity<String>(
                 "actualizado exitosamente", HttpStatus.OK);
     }
-
     @GetMapping(path = "/childrenByCity")
     public ResponseEntity<ResponseDTO> cityReport(){
         Object output = null;
@@ -119,10 +117,9 @@ public class ListSEController {
 
         }
     }
-
     @GetMapping(path="/test")
     public ResponseEntity<ResponseDTO> getCities(){
         return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
-                listSEService.getCities(),null),HttpStatus.OK);
+                listSEService.getKids(),null),HttpStatus.OK);
     }
 }

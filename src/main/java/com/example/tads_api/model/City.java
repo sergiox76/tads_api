@@ -8,5 +8,5 @@ public class City {
     @NotEmpty
     private String code;
     @NotEmpty
-    private String city;
+    private String name;
 }

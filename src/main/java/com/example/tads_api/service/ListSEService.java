@@ -18,13 +18,13 @@ public class ListSEService {
     public ListSEService() {
         kids = new ListSE();
         kids.add(new Kid("1005085752", "Valeria Osorio"
-                , (byte) 20, "mujer",new City("05001","Medellin")));
+                , (byte) 20, "mujer",new City("05001","Medellin"),2));
         kids.add(new Kid("356373763", "Jhair Torres"
-                , (byte) 18, "hombre",new City("05091","Betania")));
+                , (byte) 18, "hombre",new City("05091","Betania"),0));
         kids.add(new Kid("4554544554", "Sergio Núñez"
-                , (byte) 19, "hombre",new City("17001","Manizales")));
+                , (byte) 19, "hombre",new City("17001","Manizales"),2));
         kids.add(new Kid("28746378192", "Daniela Torrres"
-                , (byte) 18, "mujer",new City("17001","Manizales")));
+                , (byte) 18, "mujer",new City("17001","Manizales"),2));
 
 
     }
@@ -64,10 +64,6 @@ public class ListSEService {
         } catch (KidsException e) {
             throw new KidsException(e.getMessage());
         }
-    }
-
-    public List<String> getCities(){
-        return kids.getCities();
     }
 }
 

@@ -1,11 +1,11 @@
 package com.example.tads_api.model;
 
+import com.example.tads_api.controller.dto.ReportDTO;
 import com.example.tads_api.exceptions.KidsException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -43,9 +43,10 @@ public class List_DE {
             }
             temp.setNext(newNode);
             newNode.setPrevious(temp);
-            this.size++;
-//            System.out.println("New size value: "+this.size);
+
+            System.out.println("New size value: "+this.size);
         }
+        this.size++;
     }
 
     public void addToStart(Kid newKid){
@@ -58,8 +59,8 @@ public class List_DE {
             newHead.setPrevious(null);
             this.head.setPrevious(newHead);
             this.head=newHead;
-            this.size++;
         }
+        this.size++;
     }
 
     public void insertInPos(int pos, Kid kid) {
@@ -134,7 +135,6 @@ public class List_DE {
         if(this.head==null){
             throw new KidsException("Lista vacia");
         } else if (this.head.getData().getId().equals(id)) {
-            //Nueva cabeza
             this.head = this.head.getNext();
             this.head.setPrevious(null);
             this.size--;
@@ -142,7 +142,7 @@ public class List_DE {
         else{
             NodeDE temp = this.head;
             while(temp!=null) {
-                if (temp.getData().getId()      .equals(id)) {
+                if (temp.getData().getId().equals(id)) {
                     NodeDE previous = temp.getPrevious();
                     previous.setNext(temp.getNext());
                     temp.getNext().setPrevious(previous);
@@ -172,7 +172,6 @@ public class List_DE {
             temp.getNext().setPrevious(null);
             temp.setNext(temp.getNext().getNext());
         }
-
         this.size--;
     }
     public void deleteKamikaze(int pos) throws KidsException {
@@ -191,10 +190,64 @@ public class List_DE {
                 cont++;
             }
             NodeDE previous = temp.getPrevious();
-            temp.setPrevious(null);
-            previous.setNext(temp.getNext());
+            NodeDE nextNode = temp.getNext();
+            previous.setNext(nextNode);
+            if (nextNode != null) {
+                nextNode.setPrevious(previous);
+            }
         }
-
         this.size--;
     }
+    private String calculateAgeRange(Byte age) {
+        if (age >= 1 && age <= 4) {
+            return "1-4";
+        } else if (age >= 5 && age <= 8) {
+            return "5-8";
+        } else if (age >= 9 && age <= 12) {
+            return "9-12";
+        } else {
+            return "13 en adelante";
+        }
+    }
+    public List<ReportDTO> generateReportByGenderAgeCity() throws KidsException {
+        if (this.head == null) {
+            throw new KidsException("Lista vacía");
+        } else {
+            List<ReportDTO> report = new ArrayList<>();
+
+            // Definir los rangos de edad
+            String[] ageRanges = {"1-4", "5-8", "9-12", "13 en adelante"};
+
+            // Recorrer todos los rangos de edad
+            for (String ageRange : ageRanges) {
+                // Para realizar un seguimiento de los géneros ya incluidos
+                Set<String> addedGenders = new HashSet<>();
+
+                NodeDE temp = this.head;
+
+                while (temp != null) {
+                    String tempGender = temp.getData().getGender();
+                    String tempAgeRange = calculateAgeRange(temp.getData().getAge());
+
+                    if (tempAgeRange.equals(ageRange) && !addedGenders.contains(tempGender)) {
+                        String city = temp.getData().getCityname() != null ? temp.getData().getCityname().getName() : "";
+                        report.add(new ReportDTO(tempGender, ageRange, city, temp.getData().getBrothers()));
+                        addedGenders.add(tempGender);
+                    }
+
+                    temp = temp.getNext();
+                }
+
+                // Completar la combinación de género que falta en este rango de edad
+                for (String gender : new String[]{"Male", "Female"}) {
+                    if (!addedGenders.contains(gender)) {
+                        report.add(new ReportDTO(gender, ageRange, "", 0));
+                    }
+                }
+            }
+
+            return report;
+        }
+    }
+
 }

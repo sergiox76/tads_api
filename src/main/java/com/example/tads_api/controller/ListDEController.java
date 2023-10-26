@@ -1,9 +1,9 @@
 package com.example.tads_api.controller;
 
+import com.example.tads_api.controller.dto.ReportDTO;
 import com.example.tads_api.controller.dto.ResponseDTO;
 import com.example.tads_api.exceptions.KidsException;
 import com.example.tads_api.model.Kid;
-import com.example.tads_api.model.Node;
 import com.example.tads_api.service.ListDEService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -113,4 +113,16 @@ public class ListDEController {
                     null,errors),HttpStatus.OK);
         }
     }
+    @GetMapping("/generateReportByGenderAgeCity")
+    public ResponseEntity<ResponseDTO> generateReportByGenderAgeCity() {
+        try {
+            List<ReportDTO> report = listDEService.generateReportByGenderAgeCity();
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(), report, null), HttpStatus.OK);
+        } catch (KidsException e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), null, errors), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
+
