@@ -9,6 +9,8 @@ public class NodeDE {
     private NodeDE next;
     private NodeDE previous;
 
-    public NodeDE (Kid data){this.data = data;}
+    public NodeDE (Kid data){
+        this.data = data;
+    }
 
 }

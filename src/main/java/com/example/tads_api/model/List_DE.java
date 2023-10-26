@@ -106,4 +106,95 @@ public class List_DE {
             this.head.setData(lastKid);
         }
     }
+    public void intercalateByGender() throws KidsException{
+        if(this.head == null){
+            throw new KidsException("Lista vacia");
+        } else if (this.head.getNext()==null) {
+            throw new KidsException("Insuficientes elementos");
+        }
+        else{
+            List_DE listCopy = new List_DE();
+            NodeDE temp = this.head;
+            int posMale = 1;
+            int posFemale = 2;
+            while(temp!= null){
+                if(temp.getData().getGender().equals("Male")){
+                    listCopy.insertInPos(posMale,temp.getData());
+                    posMale = posMale+2;
+                } else if (temp.getData().getGender().equals("Female")) {
+                    listCopy.insertInPos(posFemale,temp.getData());
+                    posFemale=posFemale+2;
+                }
+                temp = temp.getNext();
+            }
+            this.head= listCopy.getHead();
+        }
+    }
+    public void deleteById(String id) throws KidsException{
+        if(this.head==null){
+            throw new KidsException("Lista vacia");
+        } else if (this.head.getData().getId().equals(id)) {
+            //Nueva cabeza
+            this.head = this.head.getNext();
+            this.head.setPrevious(null);
+            this.size--;
+        }
+        else{
+            NodeDE temp = this.head;
+            while(temp!=null) {
+                if (temp.getData().getId().equals(id)) {
+                    NodeDE previous = temp.getPrevious();
+                    previous.setNext(temp.getNext());
+                    temp.getNext().setPrevious(previous);
+                }
+                temp = temp.getNext();
+            }
+            this.size--;
+        }
+    }
+    public void deleteInPos(int pos) throws KidsException {
+        if (pos <= 0 || pos > this.size) {
+            throw new KidsException("Fuera de rango");
+        }
+        if (pos == 1) {
+            this.head = this.head.getNext();
+            this.head.setPrevious(null);
+        } else {
+            NodeDE temp = this.head;
+            int cont = 1;
+
+            while (cont < pos - 1) {
+                temp = temp.getNext();
+                cont++;
+            }
+
+
+            temp.getNext().setPrevious(null);
+            temp.setNext(temp.getNext().getNext());
+        }
+
+        this.size--;
+    }
+    public void deleteKamikaze(int pos) throws KidsException {
+        if (pos <= 0 || pos > this.size) {
+            throw new KidsException("Fuera de rango");
+        }
+        if (pos == 1) {
+            this.head = this.head.getNext();
+            this.head.setPrevious(null);
+        } else {
+            NodeDE temp = this.head;
+            int cont = 1;
+
+            while (cont!=pos) {
+                temp = temp.getNext();
+                cont++;
+            }
+            NodeDE previous = temp.getPrevious();
+            temp.setPrevious(null);
+            previous.setNext(temp.getNext());
+        }
+
+        this.size--;
+    }
 }
