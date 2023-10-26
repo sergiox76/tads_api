@@ -60,7 +60,7 @@ public class ListDEService {
     }
     public String deleteById(String id){
         try {
-            kids.deleteById(id);
+            kids.deleteIdDE(id);
             return "Eliminado";
         } catch (KidsException e) {
             return e.getMessage();

@@ -130,7 +130,7 @@ public class List_DE {
             this.head= listCopy.getHead();
         }
     }
-    public void deleteById(String id) throws KidsException{
+    public void deleteIdDE(String id) throws KidsException{
         if(this.head==null){
             throw new KidsException("Lista vacia");
         } else if (this.head.getData().getId().equals(id)) {
@@ -142,7 +142,7 @@ public class List_DE {
         else{
             NodeDE temp = this.head;
             while(temp!=null) {
-                if (temp.getData().getId().equals(id)) {
+                if (temp.getData().getId()      .equals(id)) {
                     NodeDE previous = temp.getPrevious();
                     previous.setNext(temp.getNext());
                     temp.getNext().setPrevious(previous);
