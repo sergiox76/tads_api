@@ -102,7 +102,7 @@ public class ListDEController {
     @DeleteMapping(path="/deletekamikaze/{pos}")
     public ResponseEntity<ResponseDTO> deleteKamikaze(@PathVariable int pos){
         String output = listDEService.deleteKamikaze(pos);
-        if(output.equals("Kamikazeeeee")){
+        if(output.equals("Kamikaze")){
             return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
                     output,null),HttpStatus.OK);
         }
